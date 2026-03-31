@@ -73,4 +73,8 @@ jobs:
         run: |
           URL=${{ steps.deploy.outputs.url }}
           echo "Testing: $URL"
-          curl -f --retry 5 --retry-delay 3 "$URL"
+          curl -f --retry 5 --retry-delay 3 \
+            -X POST \
+            -H "Content-Type: application/json" \
+            -d '{"message":{"data":"dGVzdA=="}}' \
+            "$URL"
